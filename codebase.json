@@ -11,6 +11,61 @@
     {
       "botId": "bot://core/log",
       "botVersion": "1.0.0"
+    },
+    {
+      "botId": "bot://core/schema",
+      "botVersion": "1.0.0"
+    },
+    {
+      "botId": "bot://hub/.gitignore",
+      "botVersion": "0.0.1-alpha.6",
+      "configuration": {
+        "outputPath": null
+      },
+      "dependencies": [
+        {
+          "targetPath": ".",
+          "botId": "bot://core/output"
+        },
+        {
+          "targetPath": ".",
+          "botId": "bot://core/filesystem"
+        },
+        {
+          "targetPath": ".",
+          "botId": "bot://core/log"
+        }
+      ]
+    },
+    {
+      "botId": "bot://hub/dotnet/botfactory",
+      "botVersion": "0.0.1-alpha5",
+      "configuration": {
+        "id": "bot://hub/dotnet/solution",
+        "outputPath": "DotnetSolution",
+        "projectName": "DotnetSolution",
+        "language": "CSHARP"
+      },
+      "dependencies": [
+        {
+          "targetPath": ".",
+          "botId": "bot://core/output"
+        },
+        {
+          "targetPath": ".",
+          "botId": "bot://core/filesystem"
+        },
+        {
+          "targetPath": ".",
+          "botId": "bot://core/log"
+        },
+        {
+          "botId": "bot://core/schema"
+        },
+        {
+          "botId": "bot://hub/.gitignore"
+        }
+      ]
     }
   ]
 }
