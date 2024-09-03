@@ -33,4 +33,16 @@ public class Imports
         using var block = Pdk.Allocate(json);
         ExternLog(block.Offset);
     }
+
+    [DllImport("extism", EntryPoint = "cgb_random")]
+    public static extern ulong ExternRandom(ulong offset);
+
+    public static byte[] GetRandomBytes(int numBytes)
+    {
+        var text = numBytes.ToString();
+        using var block = Pdk.Allocate(text);
+        var ptr = ExternRandom(block.Offset);
+        var response = MemoryBlock.Find(ptr).ReadBytes();
+        return response;
+    }
 }

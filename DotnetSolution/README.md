@@ -1,4 +1,8 @@
-# bot://hub/dotnet/solution
+# DotnetSolution
+
+This is the source code for the bot `bot://hub/dotnet/solution`.
+
+## How to build
 
 This bot can be built by installing the .NET SDK, then running these commands in the bot directory (the directory that contains `bot.json`):
 
