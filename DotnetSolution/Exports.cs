@@ -24,7 +24,7 @@ public class Exports
         try
         {
             // Create all our minibots here
-            var miniBots =
+            IMiniBot[] miniBots =
             [
                 // TODO - remove the ExampleMiniBot entry from this list because it creates a hello world file
                 // that won't be useful in real life.

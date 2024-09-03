@@ -25,7 +25,7 @@ public static partial class GraphQLOperations
             Variables = new GetConfigurationVariables() { },
         };
 
-        var response = CodegenBotHost.GraphQL(request);
+        var response = Imports.GraphQL(request);
         var result = JsonSerializer.Deserialize<GraphQLResponse<GetConfigurationData>>(
             response,
             new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }
@@ -50,7 +50,7 @@ public static partial class GraphQLOperations
             Variables = new GetFilesVariables() { Whitelist = whitelist, Blacklist = blacklist },
         };
 
-        var response = CodegenBotHost.GraphQL(request);
+        var response = Imports.GraphQL(request);
         var result = JsonSerializer.Deserialize<GraphQLResponse<GetFilesData>>(
             response,
             new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }
@@ -72,7 +72,7 @@ public static partial class GraphQLOperations
             Variables = new GetFileContentsVariables() { TextFilePath = textFilePath },
         };
 
-        var response = CodegenBotHost.GraphQL(request);
+        var response = Imports.GraphQL(request);
         var result = JsonSerializer.Deserialize<GraphQLResponse<GetFileContentsData>>(
             response,
             new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }
@@ -100,7 +100,7 @@ public static partial class GraphQLOperations
             },
         };
 
-        var response = CodegenBotHost.GraphQL(request);
+        var response = Imports.GraphQL(request);
         var result = JsonSerializer.Deserialize<GraphQLResponse<AddFileData>>(
             response,
             new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }
@@ -124,7 +124,7 @@ public static partial class GraphQLOperations
             Variables = new AddTextVariables() { CaretId = caretId, TextAndCarets = textAndCarets },
         };
 
-        var response = CodegenBotHost.GraphQL(request);
+        var response = Imports.GraphQL(request);
         var result = JsonSerializer.Deserialize<GraphQLResponse<AddTextData>>(
             response,
             new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }
@@ -153,7 +153,7 @@ public static partial class GraphQLOperations
             },
         };
 
-        var response = CodegenBotHost.GraphQL(request);
+        var response = Imports.GraphQL(request);
         var result = JsonSerializer.Deserialize<GraphQLResponse<AddKeyedTextData>>(
             response,
             new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }
@@ -177,7 +177,7 @@ public static partial class GraphQLOperations
             Variables = new AddTextByTagsVariables() { Tags = tags, TextAndCarets = textAndCarets },
         };
 
-        var response = CodegenBotHost.GraphQL(request);
+        var response = Imports.GraphQL(request);
         var result = JsonSerializer.Deserialize<GraphQLResponse<AddTextByTagsData>>(
             response,
             new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }
@@ -210,7 +210,7 @@ public static partial class GraphQLOperations
             },
         };
 
-        var response = CodegenBotHost.GraphQL(request);
+        var response = Imports.GraphQL(request);
         var result = JsonSerializer.Deserialize<GraphQLResponse<AddKeyedTextByTagsData>>(
             response,
             new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }
@@ -237,7 +237,7 @@ public static partial class GraphQLOperations
             },
         };
 
-        var response = CodegenBotHost.GraphQL(request);
+        var response = Imports.GraphQL(request);
         var result = JsonSerializer.Deserialize<GraphQLResponse<LogData>>(
             response,
             new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }
