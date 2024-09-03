@@ -38,8 +38,29 @@
       ]
     },
     {
+      "botId": "bot://hub/dotnet/solution",
+      "botVersion": "0.0.1-alpha2",
+      "configuration": {
+        "outputPath": "DotnetSolution.sln"
+      },
+      "dependencies": [
+        {
+          "targetPath": ".",
+          "botId": "bot://core/output"
+        },
+        {
+          "targetPath": ".",
+          "botId": "bot://core/filesystem"
+        },
+        {
+          "targetPath": ".",
+          "botId": "bot://core/log"
+        }
+      ]
+    },
+    {
       "botId": "bot://hub/dotnet/botfactory",
-      "botVersion": "0.0.1-alpha5",
+      "botVersion": "0.0.1-alpha6",
       "configuration": {
         "id": "bot://hub/dotnet/solution",
         "outputPath": "DotnetSolution",
