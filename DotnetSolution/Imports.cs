@@ -6,7 +6,11 @@ using Extism;
 
 namespace DotnetSolution;
 
-public class CodegenBotHost
+/// <summary>
+/// This class contains all the static methods that we can call that codegen.bot implements. See also the Exports class,
+/// which contains static methods that we can implement that are called by codegen.bot.
+/// </summary>
+public class Imports
 {
     [DllImport("extism", EntryPoint = "cgb_graphql")]
     public static extern ulong ExternGraphQL(ulong offset);

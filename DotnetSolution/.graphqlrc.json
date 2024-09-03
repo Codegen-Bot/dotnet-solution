@@ -1,20 +1,7 @@
 {
-  "schema": "schema.graphql",
-  "documents": "**/*.graphql",
-  "extensions": {
-    "strawberryShake": {
-      "name": "CodegenBot",
-      "url": "http://localhost:5050/",
-      "records": {
-        "inputs": false,
-        "entities": false
-      },
-      "transportProfiles": [
-        {
-          "default": "Http",
-          "subscription": "WebSocket"
-        }
-      ]
-    }
-  }
+  "schema": [
+    "schema.graphql",
+    "configurationSchema.graphql"
+  ],
+  "documents": "**/*.graphql"
 }
