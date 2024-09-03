@@ -18,7 +18,7 @@
     },
     {
       "botId": "bot://hub/.gitignore",
-      "botVersion": "0.0.1-alpha.6",
+      "botVersion": "0.0.1-alpha1",
       "configuration": {
         "outputPath": null
       },
@@ -39,7 +39,7 @@
     },
     {
       "botId": "bot://hub/dotnet/solution",
-      "botVersion": "0.0.1-alpha2",
+      "botVersion": "0.0.1-alpha1",
       "configuration": {
         "outputPath": "DotnetSolution.sln"
       },
@@ -60,7 +60,7 @@
     },
     {
       "botId": "bot://hub/dotnet/botfactory",
-      "botVersion": "0.0.1-alpha6",
+      "botVersion": "0.0.1-alpha2",
       "configuration": {
         "id": "bot://hub/dotnet/solution",
         "outputPath": "DotnetSolution",
