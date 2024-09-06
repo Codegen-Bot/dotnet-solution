@@ -41,7 +41,8 @@ public class Exports
                     Imports.Log(
                         new LogEvent()
                         {
-                            Level = LogEventLevel.Error,
+                            // Only a critical error will cause codegen.bot to realize that the generated code should not be used
+                            Level = LogEventLevel.Critical,
                             Message =
                                 "Failed to run minibot {MiniBot}: {ExceptionType} {Message}, {StackTrace}",
                             Args =
@@ -49,7 +50,7 @@ public class Exports
                                 miniBot.GetType().Name,
                                 e.GetType().Name,
                                 e.Message,
-                                e.StackTrace,
+                                e.StackTrace ?? "",
                             ],
                         }
                     );
@@ -63,9 +64,10 @@ public class Exports
             Imports.Log(
                 new LogEvent()
                 {
-                    Level = LogEventLevel.Error,
+                    // Only a critical error will cause codegen.bot to realize that the generated code should not be used
+                    Level = LogEventLevel.Critical,
                     Message = "Failed to initialize bot: {ExceptionType} {Message}, {StackTrace}",
-                    Args = [e.GetType().Name, e.Message, e.StackTrace],
+                    Args = [e.GetType().Name, e.Message, e.StackTrace ?? ""],
                 }
             );
             Pdk.SetError($"{e.GetType()}: {e.Message}");
