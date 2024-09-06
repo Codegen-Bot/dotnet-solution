@@ -4,7 +4,7 @@
   "readme": "Bot.md",
   "configurationSchema": "configurationSchema.graphql",
   "dependenciesSchema": "schema.graphql",
-  "wasm": "DotnetSolution.wasm",
+  "wasm": "bin/Release/net8.0/wasi-wasm/AppBundle/DotnetSolution.wasm",
   "deduplicateConfigurationSchema": true,
   "dependencies": {
     "bot://core/output": "1.0.0",
