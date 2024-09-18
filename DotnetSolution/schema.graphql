@@ -29,10 +29,7 @@ type File @source(name: "File", schema: "filesystem") {
 
 type Mutation {
   noop: String
-  setCaretSeparator(caretId: String! separator: String!): Caret! @delegate(schema: "output", path: "setCaretSeparator")
-  setCaretTags(caretId: String! tags: [CaretTagInput!]!): Caret! @delegate(schema: "output", path: "setCaretTags")
-  getOrAddCaret(caretId: String!): Caret! @delegate(schema: "output", path: "getOrAddCaret")
-  addCaretTags(caretId: String! tags: [CaretTagInput!]!): Caret! @delegate(schema: "output", path: "addCaretTags")
+  getOrAddCaret(caretId: String! tags: [CaretTagInput!]! indentation: String! separator: String!): Caret! @delegate(schema: "output", path: "getOrAddCaret")
   addFile(filePath: String! textAndCarets: String! caretDelimiterLength: Int! = 9): Caret! @delegate(schema: "output", path: "addFile")
   addKeyedText(caretId: String! key: String! textAndCarets: String! caretDelimiterLength: Int! = 9): Caret! @delegate(schema: "output", path: "addKeyedText")
   addText(caretId: String! textAndCarets: String! caretDelimiterLength: Int! = 9): Caret! @delegate(schema: "output", path: "addText")

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using CodegenBot;
@@ -308,25 +309,45 @@ public static partial class GraphQLOperations
     }
 }
 
+[JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumMemberConverter))]
 public enum FileKind
 {
+    [EnumMember(Value = "BINARY")]
     BINARY,
+
+    [EnumMember(Value = "TEXT")]
     TEXT,
 }
 
+[JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumMemberConverter))]
 public enum FileVersion
 {
+    [EnumMember(Value = "GENERATED")]
     GENERATED,
+
+    [EnumMember(Value = "HEAD")]
     HEAD,
 }
 
+[JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumMemberConverter))]
 public enum LogSeverity
 {
+    [EnumMember(Value = "TRACE")]
     TRACE,
+
+    [EnumMember(Value = "DEBUG")]
     DEBUG,
+
+    [EnumMember(Value = "INFORMATION")]
     INFORMATION,
+
+    [EnumMember(Value = "WARNING")]
     WARNING,
+
+    [EnumMember(Value = "ERROR")]
     ERROR,
+
+    [EnumMember(Value = "CRITICAL")]
     CRITICAL,
 }
 
@@ -496,7 +517,6 @@ public class GetFiles
     [JsonPropertyName("path")]
     public required string Path { get; set; }
 
-    [JsonConverter(typeof(JsonStringEnumConverter<FileKind>))]
     [JsonPropertyName("kind")]
     public required FileKind Kind { get; set; }
 }
@@ -509,7 +529,6 @@ public class LogData
 
 public class LogVariables
 {
-    [JsonConverter(typeof(JsonStringEnumConverter<LogSeverity>))]
     [JsonPropertyName("severity")]
     public required LogSeverity Severity { get; set; }
 

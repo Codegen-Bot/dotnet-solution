@@ -1,5 +1,5 @@
-query GetConfiguration() {
-    configuration {
-        outputPath
-    }
+query GetConfiguration {
+  configuration {
+    outputPath
+  }
 }
