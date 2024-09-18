@@ -19,14 +19,6 @@ public class SolutionFileMiniBot : IMiniBot
               Global
                 GlobalSection(SolutionConfigurationPlatforms) = preSolution
                 {{CaretRef.New(out var solutionConfigurationPlatforms, new CaretTag("location", ".sln/SolutionConfigurationPlatforms"))}}
-                  	Debug|Any CPU = Debug|Any CPU
-                  	Debug|ARM64 = Debug|ARM64
-                  	Debug|x64 = Debug|x64
-                  	Debug|x86 = Debug|x86
-                  	Release|Any CPU = Release|Any CPU
-                  	Release|ARM64 = Release|ARM64
-                  	Release|x64 = Release|x64
-                  	Release|x86 = Release|x86
                 EndGlobalSection
                 GlobalSection(ProjectConfigurationPlatforms) = postSolution
                 {{CaretRef.New(out var solutionProjectConfigurationPlatforms, new CaretTag("location", ".sln/ProjectConfigurationPlatforms"))}}
@@ -41,5 +33,24 @@ public class SolutionFileMiniBot : IMiniBot
 
               """
         );
+
+        AddSolutionConfigurationPlatform("Debug|Any CPU");
+        AddSolutionConfigurationPlatform("Debug|ARM64");
+        AddSolutionConfigurationPlatform("Debug|x64");
+        AddSolutionConfigurationPlatform("Debug|x86");
+        AddSolutionConfigurationPlatform("Release|Any CPU");
+        AddSolutionConfigurationPlatform("Release|ARM64");
+        AddSolutionConfigurationPlatform("Release|x64");
+        AddSolutionConfigurationPlatform("Release|x86");
+    }
+
+    private static void AddSolutionConfigurationPlatform(string solutionConfigurationPlatform)
+    {
+	    GraphQLOperations.AddKeyedTextByTags(solutionConfigurationPlatform,
+		    [new CaretTagInput() { Name = "location", Value = ".sln/SolutionConfigurationPlatforms" }],
+		    $"""
+		    {solutionConfigurationPlatform} = {solutionConfigurationPlatform}
+
+		    """);
     }
 }
