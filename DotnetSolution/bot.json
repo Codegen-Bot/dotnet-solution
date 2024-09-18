@@ -1,11 +1,10 @@
 {
   "type": "wasm",
   "id": "bot://hub/dotnet/solution",
+  "wasm": "bin/Release/net8.0/wasi-wasm/AppBundle/DotnetSolution.wasm",
   "readme": "Bot.md",
   "configurationSchema": "configurationSchema.graphql",
   "dependenciesSchema": "schema.graphql",
-  "wasm": "bin/Release/net8.0/wasi-wasm/AppBundle/DotnetSolution.wasm",
-  "deduplicateConfigurationSchema": true,
   "dependencies": {
     "bot://core/output": "1.0.0",
     "bot://core/filesystem": "1.0.0",

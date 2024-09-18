@@ -8,7 +8,13 @@ public class SolutionFileMiniBot : IMiniBot
     {
 	    var configuration = GraphQLOperations.GetConfiguration().Configuration;
 
-        GraphQLOperations.AddFile(configuration.OutputPath,
+	    var outputPath = configuration.OutputPath;
+	    if (!outputPath.EndsWith(".sln"))
+	    {
+		    outputPath += ".sln";
+	    }
+	    
+        GraphQLOperations.AddFile(outputPath,
             $$"""
 
               Microsoft Visual Studio Solution File, Format Version 12.00

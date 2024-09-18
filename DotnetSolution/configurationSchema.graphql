@@ -1,7 +1,6 @@
 type Configuration {
   """
-  It's best to add documentation strings for your fields, because they are displayed
-  when codegen.bot prompts the bot user for each value.
+  The path to the solution file. If this doesn't end with .sln, then .sln will be appended to it.
   """
   outputPath: String!
 }
