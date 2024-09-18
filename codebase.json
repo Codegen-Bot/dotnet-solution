@@ -54,14 +54,15 @@
     },
     {
       "botId": "bot://hub/dotnet/botfactory",
-      "botVersion": "0.0.1-alpha36",
+      "botVersion": "0.0.1-alpha58",
       "configuration": {
         "id": "bot://hub/dotnet/solution",
         "outputPath": "DotnetSolution",
         "projectName": "DotnetSolution",
         "language": "CSHARP",
         "minimalWorkingExample": false,
-        "dotnetVersion": "0.0.1-alpha35"
+        "dotnetVersion": "DotNet8",
+        "copybots": []
       },
       "dependencies": [
         {
