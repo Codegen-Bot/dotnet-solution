@@ -4,7 +4,12 @@ This is the source code for the bot `bot://hub/dotnet/solution`.
 
 ## How to build
 
-This bot can be built by installing the .NET SDK, then running these commands in the bot directory (the directory that contains `bot.json`):
+This bot can be built by doing the following:
+
+1. Download  [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download)
+2. Download and unzip [WASI SDK]( )
+3. Set the `WASI_SDK_PATH` environment variable to point to the unzipped WASI SDK
+4. Run these commands in the bot directory (the directory that contains `bot.json`):
 
 ```shell
 dotnet workload install wasi-experimental

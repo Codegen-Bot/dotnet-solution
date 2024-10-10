@@ -1,6 +1,6 @@
 {
   "schema": [
-    "schema.graphql",
+    "consumedSchema.graphql",
     "configurationSchema.graphql"
   ],
   "documents": "**/*.graphql"

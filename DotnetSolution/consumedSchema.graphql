@@ -17,6 +17,7 @@ type CaretTag @source(name: "CaretTag", schema: "output") {
   value: String!
 }
 
+"This is a special type. A non-nullable field of this type called \"configuration\" will be\ninserted in the query root type, so that this bot can access its configuration values.\n\nThis is where we put all configuration settings that are needed by this bot.\nThis file can contain any number of types, but it is best to keep configuration simple\nand prefer convention over configuration. That helps keep bots easy to use, focused,\nand easy to refactor."
 type Configuration @source(name: "Configuration", schema: "Configuration") {
   "It's best to add documentation strings for your fields, because they are displayed\nwhen codegen.bot prompts the bot user for each value."
   outputPath: String!

@@ -5,7 +5,7 @@ query GetFiles($whitelist: [String!]!, $blacklist: [String!]!) {
   }
 }
 
-query GetFileContents($textFilePath: String!) {
+query ReadTextFile($textFilePath: String!) {
   readTextFile(textFilePath: $textFilePath)
 }
 
