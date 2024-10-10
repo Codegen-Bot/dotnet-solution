@@ -25,8 +25,12 @@ public class GraphQLError
 
 [JsonSerializable(typeof(GraphQLError))]
 [JsonSerializable(typeof(FileKind))]
+[JsonSerializable(typeof(FileKind))]
+[JsonSerializable(typeof(FileVersion))]
 [JsonSerializable(typeof(FileVersion))]
 [JsonSerializable(typeof(LogSeverity))]
+[JsonSerializable(typeof(LogSeverity))]
+[JsonSerializable(typeof(CaretTagInput))]
 [JsonSerializable(typeof(CaretTagInput))]
 [JsonSerializable(typeof(AddFileVariables))]
 [JsonSerializable(typeof(AddFileData))]
@@ -320,6 +324,26 @@ public enum FileKind
 }
 
 [JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumMemberConverter))]
+public enum FileKind
+{
+    [EnumMember(Value = "BINARY")]
+    BINARY,
+
+    [EnumMember(Value = "TEXT")]
+    TEXT,
+}
+
+[JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumMemberConverter))]
+public enum FileVersion
+{
+    [EnumMember(Value = "GENERATED")]
+    GENERATED,
+
+    [EnumMember(Value = "HEAD")]
+    HEAD,
+}
+
+[JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumMemberConverter))]
 public enum FileVersion
 {
     [EnumMember(Value = "GENERATED")]
@@ -349,6 +373,37 @@ public enum LogSeverity
 
     [EnumMember(Value = "CRITICAL")]
     CRITICAL,
+}
+
+[JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumMemberConverter))]
+public enum LogSeverity
+{
+    [EnumMember(Value = "TRACE")]
+    TRACE,
+
+    [EnumMember(Value = "DEBUG")]
+    DEBUG,
+
+    [EnumMember(Value = "INFORMATION")]
+    INFORMATION,
+
+    [EnumMember(Value = "WARNING")]
+    WARNING,
+
+    [EnumMember(Value = "ERROR")]
+    ERROR,
+
+    [EnumMember(Value = "CRITICAL")]
+    CRITICAL,
+}
+
+public class CaretTagInput
+{
+    [JsonPropertyName("name")]
+    public required string Name { get; set; }
+
+    [JsonPropertyName("value")]
+    public required string Value { get; set; }
 }
 
 public class CaretTagInput
