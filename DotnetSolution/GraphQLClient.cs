@@ -25,12 +25,8 @@ public class GraphQLError
 
 [JsonSerializable(typeof(GraphQLError))]
 [JsonSerializable(typeof(FileKind))]
-[JsonSerializable(typeof(FileKind))]
-[JsonSerializable(typeof(FileVersion))]
 [JsonSerializable(typeof(FileVersion))]
 [JsonSerializable(typeof(LogSeverity))]
-[JsonSerializable(typeof(LogSeverity))]
-[JsonSerializable(typeof(CaretTagInput))]
 [JsonSerializable(typeof(CaretTagInput))]
 [JsonSerializable(typeof(AddFileVariables))]
 [JsonSerializable(typeof(AddFileData))]
@@ -56,9 +52,6 @@ public class GraphQLError
 [JsonSerializable(typeof(GetConfigurationData))]
 [JsonSerializable(typeof(GraphQLResponse<GetConfigurationData>))]
 [JsonSerializable(typeof(GetConfiguration))]
-[JsonSerializable(typeof(GetFileContentsVariables))]
-[JsonSerializable(typeof(GetFileContentsData))]
-[JsonSerializable(typeof(GraphQLResponse<GetFileContentsData>))]
 [JsonSerializable(typeof(GetFilesVariables))]
 [JsonSerializable(typeof(GetFilesData))]
 [JsonSerializable(typeof(GraphQLResponse<GetFilesData>))]
@@ -66,6 +59,9 @@ public class GraphQLError
 [JsonSerializable(typeof(LogVariables))]
 [JsonSerializable(typeof(LogData))]
 [JsonSerializable(typeof(GraphQLResponse<LogData>))]
+[JsonSerializable(typeof(ReadTextFileVariables))]
+[JsonSerializable(typeof(ReadTextFileData))]
+[JsonSerializable(typeof(GraphQLResponse<ReadTextFileData>))]
 public partial class GraphQLOperationsJsonSerializerContext : JsonSerializerContext { }
 
 public static partial class GraphQLOperations
@@ -236,30 +232,6 @@ public static partial class GraphQLOperations
             );
     }
 
-    public static GetFileContentsData GetFileContents(string textFilePath)
-    {
-        var request = new GraphQLRequest<GetFileContentsVariables>
-        {
-            Query = """
-                query GetFileContents($textFilePath: String!) {
-                  readTextFile(textFilePath: $textFilePath)
-                }
-                """,
-            OperationName = "GetFileContents",
-            Variables = new GetFileContentsVariables() { TextFilePath = textFilePath },
-        };
-
-        var response = Imports.GraphQL(request);
-        var result = JsonSerializer.Deserialize<GraphQLResponse<GetFileContentsData>>(
-            response,
-            GraphQLOperationsJsonSerializerContext.Default.GraphQLResponseGetFileContentsData
-        );
-        return result?.Data
-            ?? throw new InvalidOperationException(
-                "Received null data for request GetFileContents."
-            );
-    }
-
     public static GetFilesData GetFiles(List<string>? whitelist, List<string>? blacklist)
     {
         var request = new GraphQLRequest<GetFilesVariables>
@@ -311,6 +283,28 @@ public static partial class GraphQLOperations
         return result?.Data
             ?? throw new InvalidOperationException("Received null data for request Log.");
     }
+
+    public static ReadTextFileData ReadTextFile(string textFilePath)
+    {
+        var request = new GraphQLRequest<ReadTextFileVariables>
+        {
+            Query = """
+                query ReadTextFile($textFilePath: String!) {
+                  readTextFile(textFilePath: $textFilePath)
+                }
+                """,
+            OperationName = "ReadTextFile",
+            Variables = new ReadTextFileVariables() { TextFilePath = textFilePath },
+        };
+
+        var response = Imports.GraphQL(request);
+        var result = JsonSerializer.Deserialize<GraphQLResponse<ReadTextFileData>>(
+            response,
+            GraphQLOperationsJsonSerializerContext.Default.GraphQLResponseReadTextFileData
+        );
+        return result?.Data
+            ?? throw new InvalidOperationException("Received null data for request ReadTextFile.");
+    }
 }
 
 [JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumMemberConverter))]
@@ -321,26 +315,6 @@ public enum FileKind
 
     [EnumMember(Value = "TEXT")]
     TEXT,
-}
-
-[JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumMemberConverter))]
-public enum FileKind
-{
-    [EnumMember(Value = "BINARY")]
-    BINARY,
-
-    [EnumMember(Value = "TEXT")]
-    TEXT,
-}
-
-[JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumMemberConverter))]
-public enum FileVersion
-{
-    [EnumMember(Value = "GENERATED")]
-    GENERATED,
-
-    [EnumMember(Value = "HEAD")]
-    HEAD,
 }
 
 [JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumMemberConverter))]
@@ -373,37 +347,6 @@ public enum LogSeverity
 
     [EnumMember(Value = "CRITICAL")]
     CRITICAL,
-}
-
-[JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumMemberConverter))]
-public enum LogSeverity
-{
-    [EnumMember(Value = "TRACE")]
-    TRACE,
-
-    [EnumMember(Value = "DEBUG")]
-    DEBUG,
-
-    [EnumMember(Value = "INFORMATION")]
-    INFORMATION,
-
-    [EnumMember(Value = "WARNING")]
-    WARNING,
-
-    [EnumMember(Value = "ERROR")]
-    ERROR,
-
-    [EnumMember(Value = "CRITICAL")]
-    CRITICAL,
-}
-
-public class CaretTagInput
-{
-    [JsonPropertyName("name")]
-    public required string Name { get; set; }
-
-    [JsonPropertyName("value")]
-    public required string Value { get; set; }
 }
 
 public class CaretTagInput
@@ -540,18 +483,6 @@ public class GetConfiguration
     public required string OutputPath { get; set; }
 }
 
-public class GetFileContentsData
-{
-    [JsonPropertyName("readTextFile")]
-    public string? ReadTextFile { get; set; }
-}
-
-public class GetFileContentsVariables
-{
-    [JsonPropertyName("textFilePath")]
-    public required string TextFilePath { get; set; }
-}
-
 public class GetFilesData
 {
     [JsonPropertyName("files")]
@@ -592,4 +523,16 @@ public class LogVariables
 
     [JsonPropertyName("arguments")]
     public List<string>? Arguments { get; set; }
+}
+
+public class ReadTextFileData
+{
+    [JsonPropertyName("readTextFile")]
+    public string? ReadTextFile { get; set; }
+}
+
+public class ReadTextFileVariables
+{
+    [JsonPropertyName("textFilePath")]
+    public required string TextFilePath { get; set; }
 }
