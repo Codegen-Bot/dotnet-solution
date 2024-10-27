@@ -9,7 +9,7 @@ This bot can be built by doing the following:
 1. Download  [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download)
 2. Download and unzip [WASI SDK]( )
 3. Set the `WASI_SDK_PATH` environment variable to point to the unzipped WASI SDK
-4. Run these commands in the bot directory (the directory that contains `bot.json`):
+4. Run these commands in the bot directory (the directory that contains `bot.yaml`):
 
 ```shell
 dotnet workload install wasi-experimental
