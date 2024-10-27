@@ -46,7 +46,6 @@ type Query {
   readTextFile(textFilePath: String! fileVersion: FileVersion): String @delegate(schema: "filesystem", path: "readTextFile")
   files(whitelist: [String!] blacklist: [String!]): [File!]! @delegate(schema: "filesystem", path: "files")
   logNoop: Boolean! @delegate(schema: "log", path: "logNoop")
-  markAsReady(processId: Int!): Boolean! @delegate(schema: "readiness", path: "markAsReady")
   configuration: Configuration! @delegate(schema: "Configuration", path: "configuration")
 }
 
