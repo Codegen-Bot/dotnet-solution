@@ -6,7 +6,7 @@ public class SolutionFileMiniBot : IMiniBot
 {
     public void Execute()
     {
-	    var configuration = GraphQLOperations.GetConfiguration().Configuration;
+	    var configuration = GraphQLClient.GetConfiguration().Configuration;
 
 	    var outputPath = configuration.OutputPath;
 	    if (!outputPath.EndsWith(".sln"))
@@ -14,7 +14,7 @@ public class SolutionFileMiniBot : IMiniBot
 		    outputPath += ".sln";
 	    }
 	    
-        GraphQLOperations.AddFile(outputPath,
+        GraphQLClient.AddFile(outputPath,
             $$"""
 
               Microsoft Visual Studio Solution File, Format Version 12.00
@@ -52,7 +52,7 @@ public class SolutionFileMiniBot : IMiniBot
 
     private static void AddSolutionConfigurationPlatform(string solutionConfigurationPlatform)
     {
-	    GraphQLOperations.AddKeyedTextByTags(solutionConfigurationPlatform,
+	    GraphQLClient.AddKeyedTextByTags(solutionConfigurationPlatform,
 		    [new CaretTagInput() { Name = "location", Value = ".sln/SolutionConfigurationPlatforms" }],
 		    $"""
 		    {solutionConfigurationPlatform} = {solutionConfigurationPlatform}
