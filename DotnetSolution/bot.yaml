@@ -1,0 +1,21 @@
+id: bot://hub/dotnet/solution
+wasm: bin/Release/net8.0/wasi-wasm/AppBundle/DotnetSolution.wasm
+providedSchema: providedSchema.graphql
+readme: Bot.md
+configurationSchema: configurationSchema.graphql
+consumedSchema: consumedSchema.graphql
+excludeConfigurationFromConsumedSchema: 
+dependencies:
+  bot://core/output: 1.0.0
+  bot://core/filesystem: 1.0.0
+  bot://core/log: 1.0.0
+  bot://core/ready: 1.0.0
+  
+tags: 
+private: 
+exec:
+  devenv: dotnet workload install wasi-experimental
+  build: dotnet build -c Release -r wasi-wasm
+  build-docker: docker run -v .:/src codegenbot/dotnet-bot-builder:net8.0
+  run: dotnet run
+  
