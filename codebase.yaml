@@ -1,1 +1,58 @@
 targetPath: .
+pipelines:
+  default:
+    steps:
+    - installs:
+      - botId: bot://core/schema
+        botVersion: 1.0.0
+      - botId: bot://core/random
+        botVersion: 1.0.0
+      - botId: bot://core/output
+        botVersion: 1.0.0
+      - botId: bot://core/filesystem
+        botVersion: 1.0.0
+      - botId: bot://core/log
+        botVersion: 1.0.0
+      - botId: bot://core/ready
+        botVersion: 1.0.0
+      - botId: bot://parse/graphql
+        botVersion: 1.0.0
+      - botId: bot://hub/dotnet/solution
+        botVersion: 0.0.1-alpha12
+        configuration:
+          defaultSolutionPath: DotnetSolution
+        dependencies:
+        - botId: bot://core/output
+        - botId: bot://core/filesystem
+        - botId: bot://core/log
+        - botId: bot://core/ready
+        - botId: bot://core/random
+      - botId: bot://hub/.gitignore
+        botVersion: 0.0.1-alpha20
+        dependencies:
+        - botId: bot://core/output
+        - botId: bot://core/filesystem
+        - botId: bot://core/log
+        - botId: bot://core/ready
+      - botId: bot://hub/dotnet/botfactory
+        botVersion: 0.0.1-alpha123
+        configuration:
+          id: bot://hub/dotnet/solution
+          language: CSHARP
+          outputPath: DotnetSolution
+          projectName: DotnetSolution
+          minimalWorkingExample: false
+          provideApi: true
+          dotnetVersion: DotNet8
+          copybots: []
+          type: 
+        dependencies:
+        - botId: bot://core/schema
+        - botId: bot://core/random
+        - botId: bot://core/output
+        - botId: bot://core/filesystem
+        - botId: bot://core/log
+        - botId: bot://core/ready
+        - botId: bot://parse/graphql
+        - botId: bot://hub/dotnet/solution
+        - botId: bot://hub/.gitignore

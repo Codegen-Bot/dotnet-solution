@@ -10,7 +10,8 @@ dependencies:
   bot://core/filesystem: 1.0.0
   bot://core/log: 1.0.0
   bot://core/ready: 1.0.0
-  
+  bot://core/random: 1.0.0
+
 tags: 
 private: 
 exec:

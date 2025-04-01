@@ -1,5 +1,9 @@
 query GetConfiguration {
   configuration {
-    outputPath
+    defaultSolutionPath
   }
+}
+
+query GetProjectUuid($seed: String) {
+  randomUuid(seed: $seed)
 }

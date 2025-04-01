@@ -87,10 +87,6 @@ public class Exports
             // Create all our minibots here
             IMiniBot[] miniBots =
             [
-                // TODO - remove the ExampleMiniBot entry from this list because it creates a hello world file
-                // that won't be useful in real life, and could cause problems if you're writing to configuration.OutputPath elsewhere,
-                // or if you're assuming configuration.OutputPath is a directory and you're writing to files under it.
-                new ExampleMiniBot(graphQLClient),
             ];
 
             // Run each minibot in order

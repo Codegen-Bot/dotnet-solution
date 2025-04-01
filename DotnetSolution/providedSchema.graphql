@@ -2,3 +2,15 @@ schema {
   query: Query
   mutation: Mutation
 }
+
+type Mutation {
+  """
+  Adds a project to the solution file.
+  """
+  addProject(solutionFile: String projectFilePath: String! projectTypeUuid: String! projectConfigurationPlatforms: [String!]): String!
+  addSolutionConfigurationPlatform(solutionFile: String path: String solutionConfigurationPlatform: String!): String!
+}
+
+type Query {
+  nearestSolutionPath(folderPath: String): String
+}
