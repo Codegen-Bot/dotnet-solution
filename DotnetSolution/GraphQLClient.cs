@@ -387,7 +387,7 @@ public partial class WasmGraphQLClient(ICodegenBotImports imports) : IGraphQLCli
             Query = """
                 query GetConfiguration {
                   configuration {
-                    outputPath
+                    defaultSolutionPath
                   }
                 }
                 """,
@@ -407,6 +407,34 @@ public partial class WasmGraphQLClient(ICodegenBotImports imports) : IGraphQLCli
         return result?.Data
             ?? throw new InvalidOperationException(
                 "Received null data for request GetConfiguration."
+            );
+    }
+
+    public GetProjectUuidData GetProjectUuid(string? seed)
+    {
+        var request = new GraphQLRequest<GetProjectUuidVariables>
+        {
+            Query = """
+                query GetProjectUuid($seed: String) {
+                  randomUuid(seed: $seed)
+                }
+                """,
+            OperationName = "GetProjectUuid",
+            Variables = new GetProjectUuidVariables() { Seed = seed },
+        };
+
+        var response = imports.GraphQL(
+            request,
+            GraphQLClientJsonSerializerContext.Default.GraphQLRequestGetProjectUuidVariables
+        );
+        response = JsonUtility.EnsureTypeDiscriminatorPropertiesComeFirst(response);
+        var result = JsonSerializer.Deserialize<GraphQLResponse<GetProjectUuidData>>(
+            response,
+            GraphQLClientJsonSerializerContext.Default.GraphQLResponseGetProjectUuidData
+        );
+        return result?.Data
+            ?? throw new InvalidOperationException(
+                "Received null data for request GetProjectUuid."
             );
     }
 }
@@ -879,7 +907,7 @@ public partial class SyncHttpGraphQLClient(HttpClient httpClient, string uri) : 
             Query = """
                 query GetConfiguration {
                   configuration {
-                    outputPath
+                    defaultSolutionPath
                   }
                 }
                 """,
@@ -909,6 +937,44 @@ public partial class SyncHttpGraphQLClient(HttpClient httpClient, string uri) : 
         return result?.Data
             ?? throw new InvalidOperationException(
                 "Received null data for request GetConfiguration."
+            );
+    }
+
+    public GetProjectUuidData GetProjectUuid(string? seed)
+    {
+        var request = new GraphQLRequest<GetProjectUuidVariables>
+        {
+            Query = """
+                query GetProjectUuid($seed: String) {
+                  randomUuid(seed: $seed)
+                }
+                """,
+            OperationName = "GetProjectUuid",
+            Variables = new GetProjectUuidVariables() { Seed = seed },
+        };
+
+        HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, uri)
+        {
+            Version = HttpVersion.Version11,
+            VersionPolicy = HttpVersionPolicy.RequestVersionOrLower,
+        };
+        requestMessage.Content = JsonContent.Create(
+            request,
+            GraphQLClientJsonSerializerContext.Default.GraphQLRequestGetProjectUuidVariables
+        );
+        var responseMessage = httpClient.Send(requestMessage);
+        var responseStream = responseMessage.Content.ReadAsStream();
+        using var reader = new StreamReader(responseStream);
+        var response = reader.ReadToEnd();
+
+        response = JsonUtility.EnsureTypeDiscriminatorPropertiesComeFirst(response);
+        var result = JsonSerializer.Deserialize<GraphQLResponse<GetProjectUuidData>>(
+            response,
+            GraphQLClientJsonSerializerContext.Default.GraphQLResponseGetProjectUuidData
+        );
+        return result?.Data
+            ?? throw new InvalidOperationException(
+                "Received null data for request GetProjectUuid."
             );
     }
 }
@@ -945,6 +1011,8 @@ public partial interface IGraphQLClient
     LogData Log(LogSeverity severity, string message, IReadOnlyList<string> arguments);
 
     GetConfigurationData GetConfiguration();
+
+    GetProjectUuidData GetProjectUuid(string? seed);
 }
 
 [JsonSerializable(typeof(GraphQLRequest<MarkAsReadyVariables>))]
@@ -992,6 +1060,9 @@ public partial interface IGraphQLClient
 [JsonSerializable(typeof(GraphQLResponse<GetConfigurationData>))]
 [JsonSerializable(typeof(GetConfigurationData))]
 [JsonSerializable(typeof(GetConfigurationConfiguration))]
+[JsonSerializable(typeof(GraphQLRequest<GetProjectUuidVariables>))]
+[JsonSerializable(typeof(GraphQLResponse<GetProjectUuidData>))]
+[JsonSerializable(typeof(GetProjectUuidData))]
 [JsonSourceGenerationOptions(WriteIndented = true)]
 public partial class GraphQLClientJsonSerializerContext : JsonSerializerContext;
 
@@ -1278,6 +1349,18 @@ public partial class GetConfigurationData
 
 public partial class GetConfigurationConfiguration
 {
-    [JsonPropertyName("outputPath")]
-    public required string OutputPath { get; set; }
+    [JsonPropertyName("defaultSolutionPath")]
+    public required string DefaultSolutionPath { get; set; }
+}
+
+public partial class GetProjectUuidVariables
+{
+    [JsonPropertyName("seed")]
+    public required string? Seed { get; set; }
+}
+
+public partial class GetProjectUuidData
+{
+    [JsonPropertyName("randomUuid")]
+    public required string RandomUuid { get; set; }
 }

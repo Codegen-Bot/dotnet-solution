@@ -48,6 +48,10 @@ type Query {
   files(whitelist: [String!] blacklist: [String!]): [File!]! @delegate(schema: "filesystem", path: "files")
   logNoop: Boolean! @delegate(schema: "log", path: "logNoop")
   markAsReady(processId: Int! providedApiUrl: String): Boolean! @delegate(schema: "readiness", path: "markAsReady")
+  randomUuid(seed: String): String! @delegate(schema: "random", path: "randomUuid")
+  randomDouble(seed: String): Float! @delegate(schema: "random", path: "randomDouble")
+  randomSingle(seed: String): Float! @delegate(schema: "random", path: "randomSingle")
+  randomBytes(seed: String byteCount: Int!): String! @delegate(schema: "random", path: "randomBytes")
   configuration: Configuration! @delegate(schema: "Configuration", path: "configuration")
 }
 
